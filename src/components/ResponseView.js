@@ -10,9 +10,10 @@ class ResponseView extends React.Component
 
 	render() {
 		return (
-			<Card>
+			<Card style={Object.keys(this.props.responseData).length ? {"display":"inherit"} : {"display":"none"}}>
+				<Card.Header>Response</Card.Header>
 				<Card.Body>
-					{JSON.stringify(this.props.responseData)}	
+					<pre>{JSON.stringify(this.props.responseData, null, 2)}</pre>	
 				</Card.Body>
 			</Card>
 		);

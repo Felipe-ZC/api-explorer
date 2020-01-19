@@ -30,7 +30,7 @@ class ApiExplorer extends React.Component
 				</Row>
 				<Row>
 					<Col>
-					    <RequestForm
+						<RequestForm
 							title={this.props.title}
 							url={this.props.url}
 							method={this.props.method}
@@ -40,7 +40,7 @@ class ApiExplorer extends React.Component
 					</Col>
 				</Row>
 				<Row>
-					<Col>	
+					<Col style={{"padding-top": "1.2em"}}>	
 						<ResponseView responseData={this.state.responseData}/> 
 					</Col>
 				</Row>
