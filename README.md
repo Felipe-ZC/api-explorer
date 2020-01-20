@@ -18,7 +18,7 @@ API Explorer renders given a JSON specification:
       "max": 24,
       "min": 3
     }
-]
+ ]
 }
 ```
 
