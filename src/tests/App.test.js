@@ -21,7 +21,18 @@ describe('<ApiExplorer/>', function () {
 
   it('Should render components for each entry in config body', function () {
     const wrapper = mount(<ApiExplorer {...config}/>);
-    expect(wrapper.find('#formMethod')).to.have.lengthOf(1);
+		config.body.forEach(param => {
+    	expect(wrapper.find(`#${param.name}_bodyParam`)).to.have.lengthOf(1);
+		})
+  });
+
+  it('Should render response when clicking on Send button', function () {
+    const wrapper = mount(<ApiExplorer {...config}/>);
+		config.body.forEach(param => {
+    	wrapper.find(`#${param.name}_bodyParam`).props().value = "test_input";
+		})
+
+		wrapper.find(`button[type="submit"]`).simulate('click');
   });
 
   it('Default value for url should match value in config', function () {
@@ -34,4 +45,14 @@ describe('<ApiExplorer/>', function () {
     expect(wrapper.find("#formMethod").props().defaultValue).to.equal(config.method);
   });
 
+  it('Attributes of body components should match those in config', function () {
+    const wrapper = mount(<ApiExplorer {...config}/>);
+		config.body.forEach(param => {
+			// For all the attributes in the config, check if they exist as attributes
+			// in the input field. 
+			let configAttrs = Object.keys(param);
+			let attrs = wrapper.find(`#${param.name}_bodyParam`).props();
+			configAttrs.forEach(attr => expect(attrs[attr]).to.equal(param[attr]));
+		})
+  });
 });
