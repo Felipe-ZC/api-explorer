@@ -5,7 +5,6 @@ import './styles/index.css';
 import ApiExplorer from './components/ApiExplorer';
 import config from './config/config.json';
 
-
 // TODO: Validate Config! If config is invalid, render an invalid
 // config component!
 ReactDOM.render(<ApiExplorer

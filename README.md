@@ -1,4 +1,4 @@
-# api-explorer
+# API Explorer
 
 ## Overview
 A web application that can generate UI components
@@ -18,7 +18,7 @@ API Explorer renders given a JSON specification:
       "max": 24,
       "min": 3
     }
- ]
+  ]
 }
 ```
 
@@ -41,18 +41,18 @@ body={myData.body}/>
 
 ## Setup
 
-###### Installing dependencies
+###### Install dependencies
 
 ``` npm i ```
 
-###### Starting Api-Explorer 
+###### Starting app 
 
 ``` npm start ```
 
 To view the app in your browser,
 open localhost:3000.   
 
-###### Running Tests
+###### Run Tests
 
 ``` npm test ```
 

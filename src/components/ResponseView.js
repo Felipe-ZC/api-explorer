@@ -6,9 +6,11 @@ class ResponseView extends React.Component
 {	
 	constructor(props) {
 		super(props);
+		this.getStyle = this.getStyle.bind(this);
 	}
 	
 	getStyle() {
+		// Only show compnent when there is data.
 		return {
 			"margin": "auto", 
 			"width": "90%",
@@ -17,6 +19,9 @@ class ResponseView extends React.Component
 	} 
 
 	render() {
+		// Use <pre> tags to preserve spaces and line breaks
+		// from JSON.stringify(). This way we can 'pretty print'
+		// the response data JSON.
 		return (
 			<Card style={this.getStyle()}>
 				<Card.Header>Response</Card.Header>

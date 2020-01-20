@@ -9,14 +9,18 @@ class RequestBody extends React.Component
 	}
 
 	renderBody() {
+		// Map each entry in body to a React component,
+		// handle changes in the parent component.
+		// Spread (...) objects in body, this way we can
+		// dynamially create input fields.
 		return this.props
-				   .body
-			     .map(param => (
-						 <Form.Group key={param.name} controlId={param.name + "_bodyParam"}>
-						 	<Form.Label>{param.name}</Form.Label>
-							<Form.Control {...param} onChange={this.props.onParamsChange}/>
-						</Form.Group>
-					));
+				   		 .body
+							 .map(param => (
+								 <Form.Group key={param.name} controlId={param.name + "_bodyParam"}>
+									<Form.Label>{param.name}</Form.Label>
+									<Form.Control {...param} onChange={this.props.onParamsChange}/>
+								</Form.Group>
+							));
 	}
 
 	render() {

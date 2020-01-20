@@ -17,8 +17,9 @@ class RequestForm extends React.Component
 
 	
 	sendRequest(event) {
-		event.preventDefault();
+		event.preventDefault(); // Prevent default submit event
 		this.props.onResponse({});
+		// State is loading until we get a response back
 		this.setState({"loading" : true}, () => {
 			axios({
 				"method": this.state.method || this.props.method,
@@ -26,8 +27,8 @@ class RequestForm extends React.Component
 				"data": this.state.data
 			})
 			.then(response => {
-				console.log(response);
-				this.props.onResponse(response);
+				// 
+				this.props.onResponse(response); 
 				this.setState({"loading" : false});
 			})
 			.catch(response => {
@@ -38,11 +39,14 @@ class RequestForm extends React.Component
 	}
 
 	handleChange(e) {
+		// Add body params to state.data...
 		if(e.target.id.match(/_bodyParam$/)) {
 			let newData = this.state.data || {};
 			newData[e.target.name] = e.target.value;
 			this.setState({data: newData});
 		}
+		// Update any other values on the form so 
+		// users can update url and method too.
 		else 
 			this.setState({[e.target.name]: e.target.value});
 	}
