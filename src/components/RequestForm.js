@@ -30,7 +30,6 @@ class RequestForm extends React.Component
 			this.setState({"loading" : false});
 		})
 		.catch(response => {
-			response["error"] = true;
 			this.props.onResponse(response);
 			this.setState({"loading" : false});
 		})	
