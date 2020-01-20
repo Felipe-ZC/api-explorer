@@ -23,9 +23,9 @@ class ApiExplorer extends React.Component
 			<Container fluid>
 				<Row>
 					<Col>
-						<header className="App-header">
+						<h4 className="App-header">
 							API Explorer
-						</header>
+						</h4>
 					</Col>
 				</Row>
 				<Row>
