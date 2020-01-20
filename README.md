@@ -1,10 +1,11 @@
 # API Explorer
 
 ## Overview
-A web application that can generate UI components
-that can interact with a given API specification. 
+A web application generates UI components
+which can interact with a given API specification. 
 
-API Explorer renders given a JSON specification:
+API Explorer renders components based on a JSON specification,
+each entry in "body" represents any valid HTML-5 <input> attribute.
 
 ```
 {
@@ -20,6 +21,28 @@ API Explorer renders given a JSON specification:
     }
   ]
 }
+```
+
+For example the following spec: 
+
+```
+{
+	name: 'full-name',
+	type: 'text',
+	placeholder: 'John Doe',
+	required: true,
+}
+```
+
+Will render this:
+
+```
+<div class="form-group">
+	<label class="form-label" for="full-name_bodyParam">
+		full-name
+	</label>
+	<input name="full-name" placeholder="John Doe" required="" type="text" id="full-name_bodyParam" class="form-control">
+</div>
 ```
 
 To change the API specification change the contents
@@ -45,7 +68,7 @@ body={myData.body}/>
 
 ``` npm i ```
 
-###### Starting app 
+###### Start app 
 
 ``` npm start ```
 

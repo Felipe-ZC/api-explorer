@@ -9,12 +9,29 @@ import config from './config/test.json'
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<ApiExplorer/>', function () {
-  it('Url input field should match config value', function () {
-    const wrapper = mount(<ApiExplorer
-													   title="test"
-														 url=""
-														 method={config.method}
-														 body={config.body}/>);
-    expect(wrapper.find('#fomUrl')).to.have.lengthOf(1);
+  it('Should render url input field', function () {
+    const wrapper = mount(<ApiExplorer {...config}/>);
+    expect(wrapper.find('#formUrl')).to.have.lengthOf(1);
   });
+	
+  it('Should render method select option field', function () {
+    const wrapper = mount(<ApiExplorer {...config}/>);
+    expect(wrapper.find('#formMethod')).to.have.lengthOf(1);
+  });
+
+  it('Should render components for each entry in config body', function () {
+    const wrapper = mount(<ApiExplorer {...config}/>);
+    expect(wrapper.find('#formMethod')).to.have.lengthOf(1);
+  });
+
+  it('Default value for url should match value in config', function () {
+    const wrapper = mount(<ApiExplorer {...config}/>);
+    expect(wrapper.find("#formUrl").props().defaultValue).to.equal(config.url);
+  });
+
+  it('Default value for method should match value in config', function () {
+    const wrapper = mount(<ApiExplorer {...config}/>);
+    expect(wrapper.find("#formMethod").props().defaultValue).to.equal(config.method);
+  });
+
 });
