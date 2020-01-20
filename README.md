@@ -35,13 +35,13 @@ Or invoke the ApiExplorer component
 
 ###### Installing dependencies
 
-	``` npm i ```
+``` npm i ```
 
 ###### Starting Api-Explorer (localhost:3000 by default)
 
-	``` npm start ```
+``` npm start ```
 
 ###### Running Tests
 
-	``` npm test ```
+``` npm test ```
 
