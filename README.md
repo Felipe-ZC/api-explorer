@@ -16,7 +16,8 @@ API Explorer renders given a JSON specification:
       "type": "email",
       "max": 24,
       "min": 3
-    },
+    }
+	]
 }
 ```
 
@@ -30,4 +31,11 @@ src/config/config.json
 Or invoke the ApiExplorer component
 
 ###### Setup
- 
+
+Installing dependencies
+``` npm i ```
+Starting Api-Explorer (localhost:3000 by default)
+``` npm start ```
+Running Tests
+``` npm test ```
+
