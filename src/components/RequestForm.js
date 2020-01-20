@@ -14,7 +14,9 @@ class RequestForm extends React.Component
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	sendRequest() {
+	sendRequest(event) {
+		event.preventDefault();
+		this.props.onResponse({});
 		axios({
 			"method": this.state.method || this.props.method,
 			"url": this.state.url || this.props.url,
@@ -25,8 +27,9 @@ class RequestForm extends React.Component
 			this.props.onResponse(response);
 		})
 		.catch(response => {
-			console.log(response);
-		})
+			response["error"] = true;
+			this.props.onResponse(response);
+		})	
 	}
 
 	handleChange(e) {
@@ -39,13 +42,12 @@ class RequestForm extends React.Component
 			this.setState({[e.target.name]: e.target.value});
 	}
 
-	// Add Validation!
 	render() {
 		return (
 			<Card>
 				<Card.Header>{this.props.title}</Card.Header>
 				<Card.Body>
-					<Form>
+					<Form onSubmit={this.sendRequest}>
 						<Form.Group controlId="formUrl">
 							<Form.Label>URL</Form.Label>
 							<Form.Control type="text" name="url" defaultValue={this.props.url} onChange={this.handleChange}/>
@@ -64,7 +66,7 @@ class RequestForm extends React.Component
 							<Form.Label>Body</Form.Label>
 							<RequestBody body={this.props.body} onParamsChange={this.handleChange}/> 	
 						</Form.Group>
-  						<Button onClick={this.sendRequest}>Send</Button> 
+  						<Button type="submit">Send</Button> 
 					</Form>
 				</Card.Body>
 			</Card>

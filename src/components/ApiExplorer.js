@@ -40,7 +40,7 @@ class ApiExplorer extends React.Component
 					</Col>
 				</Row>
 				<Row>
-					<Col style={{"padding-top": "1.2em"}}>	
+					<Col style={{"paddingTop": "1.2em"}}>	
 						<ResponseView responseData={this.state.responseData}/> 
 					</Col>
 				</Row>
