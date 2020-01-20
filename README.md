@@ -33,10 +33,10 @@ Or invoke the ApiExplorer component as follows:
 
 ```
 <ApiExplorer
-	title={myData.title}
-	url={myData.url}
-	method={myData.method}
-	body={myData.body}/>
+title={myData.title}
+url={myData.url}
+method={myData.method}
+body={myData.body}/>
 ```
 
 ## Setup
