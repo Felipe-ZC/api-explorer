@@ -1,9 +1,20 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { mount, shallow } from 'enzyme'; 
+import {expect} from 'chai';
+import ApiExplorer from '../components/ApiExplorer.js';
+import config from './config/test.json'
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+Enzyme.configure({ adapter: new Adapter() });
+
+describe('<ApiExplorer/>', function () {
+  it('Url input field should match config value', function () {
+    const wrapper = mount(<ApiExplorer
+													   title="test"
+														 url=""
+														 method={config.method}
+														 body={config.body}/>);
+    expect(wrapper.find('#fomUrl')).to.have.lengthOf(1);
+  });
 });

@@ -10,29 +10,31 @@ class RequestForm extends React.Component
 {	
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {"loading": false};
 		this.sendRequest = this.sendRequest.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
+	
 	sendRequest(event) {
 		event.preventDefault();
 		this.props.onResponse({});
-		this.setState({"loading" : true});
-		axios({
-			"method": this.state.method || this.props.method,
-			"url": this.state.url || this.props.url,
-			"data": this.state.data
-		})
-		.then(response => {
-			console.log(response);
-			this.props.onResponse(response);
-			this.setState({"loading" : false});
-		})
-		.catch(response => {
-			this.props.onResponse(response);
-			this.setState({"loading" : false});
-		})	
+		this.setState({"loading" : true}, () => {
+			axios({
+				"method": this.state.method || this.props.method,
+				"url": this.state.url || this.props.url,
+				"data": this.state.data
+			})
+			.then(response => {
+				console.log(response);
+				this.props.onResponse(response);
+				this.setState({"loading" : false});
+			})
+			.catch(response => {
+				this.props.onResponse(response);
+				this.setState({"loading" : false});
+			})	
+		});
 	}
 
 	handleChange(e) {
@@ -69,18 +71,17 @@ class RequestForm extends React.Component
 							<Form.Label>Body</Form.Label>
 							<RequestBody body={this.props.body} onParamsChange={this.handleChange}/> 	
 						</Form.Group>
-  						<Button type="submit">	
-								<Spinner
-									as="span"
-									animation="border"
-									size="sm"
-									role="status"
-									aria-hidden="true"
-									style={this.state.loading ? {"display":"inherit"} : {"display":"none"}}
-								/>
-								<span style={!this.state.loading ? {"display":"inherit"} : {"display":"none"}}>
-									Send
-								</span>
+  						<Button type="submit">
+								{
+									this.state.loading && <Spinner
+																					as="span"
+																					animation="border"
+																					size="sm"
+																					role="status"
+																					aria-hidden="true"
+																				/>
+								}
+								{ !this.state.loading && <span>Send</span>	}
 								</Button> 
 						</Form>
 				</Card.Body>

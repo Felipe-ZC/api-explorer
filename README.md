@@ -29,7 +29,15 @@ of the configuration file:
 src/config/config.json 
 ```
 
-Or invoke the ApiExplorer component
+Or invoke the ApiExplorer component as follows:
+
+```
+<ApiExplorer
+	title={myData.title}
+	url={myData.url}
+	method={myData.method}
+	body={myData.body}/>
+```
 
 ## Setup
 
@@ -37,9 +45,12 @@ Or invoke the ApiExplorer component
 
 ``` npm i ```
 
-###### Starting Api-Explorer (localhost:3000 by default)
+###### Starting Api-Explorer 
 
 ``` npm start ```
+
+To view the app in your browser,
+open localhost:3000.   
 
 ###### Running Tests
 
