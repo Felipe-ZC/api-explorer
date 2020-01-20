@@ -2,6 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 import RequestBody from './RequestBody.js'
 import axios from 'axios';
 
@@ -17,6 +18,7 @@ class RequestForm extends React.Component
 	sendRequest(event) {
 		event.preventDefault();
 		this.props.onResponse({});
+		this.setState({"loading" : true});
 		axios({
 			"method": this.state.method || this.props.method,
 			"url": this.state.url || this.props.url,
@@ -25,10 +27,12 @@ class RequestForm extends React.Component
 		.then(response => {
 			console.log(response);
 			this.props.onResponse(response);
+			this.setState({"loading" : false});
 		})
 		.catch(response => {
 			response["error"] = true;
 			this.props.onResponse(response);
+			this.setState({"loading" : false});
 		})	
 	}
 
@@ -66,8 +70,20 @@ class RequestForm extends React.Component
 							<Form.Label>Body</Form.Label>
 							<RequestBody body={this.props.body} onParamsChange={this.handleChange}/> 	
 						</Form.Group>
-  						<Button type="submit">Send</Button> 
-					</Form>
+  						<Button type="submit">	
+								<Spinner
+									as="span"
+									animation="border"
+									size="sm"
+									role="status"
+									aria-hidden="true"
+									style={this.state.loading ? {"display":"inherit"} : {"display":"none"}}
+								/>
+								<span style={!this.state.loading ? {"display":"inherit"} : {"display":"none"}}>
+									Send
+								</span>
+								</Button> 
+						</Form>
 				</Card.Body>
 			</Card>
 		)
