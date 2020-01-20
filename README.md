@@ -1,5 +1,6 @@
 # api-explorer
 
+###### Overview
 A web application that can generate UI components
 that can interact with a given API specification. 
 
@@ -33,9 +34,14 @@ Or invoke the ApiExplorer component
 ###### Setup
 
 Installing dependencies
+
 ``` npm i ```
+
 Starting Api-Explorer (localhost:3000 by default)
+
 ``` npm start ```
+
 Running Tests
+
 ``` npm test ```
 
