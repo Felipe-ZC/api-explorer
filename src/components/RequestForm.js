@@ -44,7 +44,7 @@ class RequestForm extends React.Component
 
 	render() {
 		return (
-			<Card>
+			<Card style={{"margin" : "auto", "width" : "90%"}}>
 				<Card.Header>{this.props.title}</Card.Header>
 				<Card.Body>
 					<Form onSubmit={this.sendRequest}>
