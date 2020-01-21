@@ -1,10 +1,12 @@
 import React from 'react';
 import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from 'enzyme-adapter-react-16'
+import axios from 'axios';;
 import { mount, shallow } from 'enzyme'; 
 import {expect} from 'chai';
 import sinon from 'sinon';
 import ApiExplorer from '../components/ApiExplorer.js';
+import RequestForm from '../components/RequestForm.js';
 import config from './config/test.json'
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -27,10 +29,13 @@ describe('<ApiExplorer/>', function () {
 		})
   });
 
-  it('Should render response on submit event', function () {
+  it('Should render response on submit event', function (done) {
     const wrapper = mount(<ApiExplorer {...config}/>);
-		wrapper.find(`form`).props().onSubmit({preventDefault: () => {}});
-    expect(wrapper.find(`ResponseView`)).to.have.lengthOf(1);
+		wrapper.find(`form`).props().onSubmit({preventDefault: () => {}}); 
+		setTimeout(() => {
+			expect(wrapper.html().match(`responseBodyView`));
+			done();
+		}, 2000);
 	});
 
   it('Default value for url should match value in config', function () {

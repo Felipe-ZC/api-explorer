@@ -39,11 +39,15 @@ class ApiExplorer extends React.Component
 					  />
 					</Col>
 				</Row>
-				<Row>
-					<Col style={{"paddingTop": "1.2em"}}>	
-						<ResponseView responseData={this.state.responseData}/> 
-					</Col>
-				</Row>
+				{
+					Object.keys(this.state.responseData).length 
+					&& 
+					<Row>
+						<Col style={{"paddingTop": "1.2em"}}>	
+							<ResponseView responseData={this.state.responseData}/> 
+						</Col>
+					</Row>
+				}
 			</Container>
 		)
 	}	

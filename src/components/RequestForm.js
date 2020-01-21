@@ -32,7 +32,6 @@ class RequestForm extends React.Component
 		this.sendRequest = this.sendRequest.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
-
 	
 	sendRequest(event) {
 		event.preventDefault(); // Prevent default submit event
@@ -44,13 +43,15 @@ class RequestForm extends React.Component
 				"url": this.state.url || this.props.url,
 				"data": this.state.data
 			})
-			.then(response => {
-				this.props.onResponse(response); 
-				this.setState({"loading" : false});
+			.then(response => {	
+				this.setState({"loading" : false}, () => {
+					this.props.onResponse(response); 
+				});
 			})
-			.catch(response => {
-				this.props.onResponse(response);
-				this.setState({"loading" : false});
+			.catch(response => {	
+				this.setState({"loading" : false}, () => {
+					this.props.onResponse(response);
+				});
 			})	
 		});
 	}
@@ -88,12 +89,12 @@ class RequestForm extends React.Component
 								<option value="PATCH">PATCH</option>
 							</Form.Control>
 						</Form.Group>
-						{ 
-							this.props.body && <Form.Group controlId="formRequestBody">
-																 	<Form.Label>Body</Form.Label>
-																	<RequestBody body={this.state.defaultVals} onParamsChange={this.handleChange}/> 	
-																 </Form.Group>
-						}
+							{ 
+								this.props.body && <Form.Group controlId="formRequestBody">
+																		<Form.Label>Body</Form.Label>
+																		<RequestBody body={this.state.defaultVals} onParamsChange={this.handleChange}/> 	
+																	 </Form.Group>
+							}
   						<Button type="submit">
 								{
 									this.state.loading && <Spinner

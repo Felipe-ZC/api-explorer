@@ -13,8 +13,7 @@ class ResponseView extends React.Component
 		// Only show compnent when there is data.
 		return {
 			"margin": "auto", 
-			"width": "90%",
-			"display": Object.keys(this.props.responseData).length ? "inherit" : "none"
+			"width": "90%"
 		};
 	} 
 
@@ -23,7 +22,7 @@ class ResponseView extends React.Component
 		// from JSON.stringify(). This way we can 'pretty print'
 		// the response data JSON.
 		return (
-			<Card style={this.getStyle()}>
+			<Card style={this.getStyle()} id="responseBodyView">
 				<Card.Header>Response</Card.Header>
 				<Card.Body>
 					<pre>{JSON.stringify(this.props.responseData, null, 2)}</pre>	
