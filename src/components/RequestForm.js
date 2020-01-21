@@ -59,8 +59,10 @@ class RequestForm extends React.Component
 	handleChange(e) {
 		// Add body params to state.data...
 		if(e.target.id.match(/_bodyParam$/)) {
-			let newData = this.state.data || {};
-			newData[e.target.name] = e.target.value;
+			let newData = {...this.state.data} || {};
+			// Do not store empty params in state...
+			if(!e.target.value) delete newData[e.target.name]
+			else newData[e.target.name] = e.target.value;
 			this.setState({data: newData});
 		}
 		// Update any other values on the form so 
