@@ -15,18 +15,20 @@ class RequestForm extends React.Component
 		// Check if body has any value attributes,
 		// if so, initialize state with these as
 		// default values.
-		this.state.defaultVals = this.props.body
-														 .map(params => {
-														 	 if(params.value) {	
-																 let temp = params.value;
-															 	 delete params.value;
-															 	 params.defaultValue = temp;
-															 } 
-															 return params;
-														 });
-		this.state
-			  .defaultVals
-			  .forEach(params => this.state.data[params.name] = params.defaultValue)
+		if(this.props.body) {
+			this.state.defaultVals = this.props.body
+															 .map(params => {
+																 if(params.value) {	
+																	 let temp = params.value;
+																	 delete params.value;
+																	 params.defaultValue = temp;
+																 } 
+																 return params;
+															 });
+			this.state
+					.defaultVals
+					.forEach(params => this.state.data[params.name] = params.defaultValue)
+		};
 		this.sendRequest = this.sendRequest.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
@@ -85,11 +87,13 @@ class RequestForm extends React.Component
 								<option value="DELETE">DELETE</option>
 								<option value="PATCH">PATCH</option>
 							</Form.Control>
-						</Form.Group>	
-						<Form.Group controlId="formRequestBody">
-							<Form.Label>Body</Form.Label>
-							<RequestBody body={this.state.defaultVals} onParamsChange={this.handleChange}/> 	
 						</Form.Group>
+						{ 
+							this.props.body && <Form.Group controlId="formRequestBody">
+																 	<Form.Label>Body</Form.Label>
+																	<RequestBody body={this.state.defaultVals} onParamsChange={this.handleChange}/> 	
+																 </Form.Group>
+						}
   						<Button type="submit">
 								{
 									this.state.loading && <Spinner
