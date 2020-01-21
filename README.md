@@ -68,6 +68,8 @@ body={myData.body}/>
 
 ``` npm i ```
 
+Make sure you are using at least Node v10! 
+
 ###### Start app 
 
 ``` npm start ```
