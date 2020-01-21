@@ -10,7 +10,23 @@ class RequestForm extends React.Component
 {	
 	constructor(props) {
 		super(props);
-		this.state = {"loading": false};
+		this.state = {"loading": false}	
+		this.state.data = {};
+		// Check if body has any value attributes,
+		// if so, initialize state with these as
+		// default values.
+		this.state.defaultVals = this.props.body
+														 .map(params => {
+														 	 if(params.value) {	
+																 let temp = params.value;
+															 	 delete params.value;
+															 	 params.defaultValue = temp;
+															 } 
+															 return params;
+														 });
+		this.state
+			  .defaultVals
+			  .forEach(params => this.state.data[params.name] = params.defaultValue)
 		this.sendRequest = this.sendRequest.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
@@ -27,7 +43,6 @@ class RequestForm extends React.Component
 				"data": this.state.data
 			})
 			.then(response => {
-				// 
 				this.props.onResponse(response); 
 				this.setState({"loading" : false});
 			})
@@ -73,7 +88,7 @@ class RequestForm extends React.Component
 						</Form.Group>	
 						<Form.Group controlId="formRequestBody">
 							<Form.Label>Body</Form.Label>
-							<RequestBody body={this.props.body} onParamsChange={this.handleChange}/> 	
+							<RequestBody body={this.state.defaultVals} onParamsChange={this.handleChange}/> 	
 						</Form.Group>
   						<Button type="submit">
 								{

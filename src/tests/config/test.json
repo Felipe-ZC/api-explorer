@@ -7,18 +7,21 @@
       "name": "email",
       "type": "email",
       "max": 24,
-      "min": 3
+      "min": 3,
+			"value" : "guy@guysmail.com"
     },
     {
       "name": "full-name",
       "type": "text",
       "placeholder": "John Doe",
-      "required": true
+      "required": true,
+			"value" : "Guy Guyson"
     },
     {
       "name": "phone",
       "type": "tel",
-      "pattern": "[0-9]{3}-[0-9]{3}-[0-9]{4}"
+      "pattern": "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+			"value" : "305-666-6969"
     }
   ]
 }

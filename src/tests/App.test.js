@@ -3,6 +3,7 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { mount, shallow } from 'enzyme'; 
 import {expect} from 'chai';
+import sinon from 'sinon';
 import ApiExplorer from '../components/ApiExplorer.js';
 import config from './config/test.json'
 
@@ -16,7 +17,7 @@ describe('<ApiExplorer/>', function () {
 	
   it('Should render method select option field', function () {
     const wrapper = mount(<ApiExplorer {...config}/>);
-    expect(wrapper.find('#formMethod')).to.have.lengthOf(1);
+		expect(wrapper.find('#formMethod')).to.have.lengthOf(1);
   });
 
   it('Should render components for each entry in config body', function () {
@@ -26,14 +27,11 @@ describe('<ApiExplorer/>', function () {
 		})
   });
 
-  it('Should render response when clicking on Send button', function () {
+  it('Should render response on submit event', function () {
     const wrapper = mount(<ApiExplorer {...config}/>);
-		config.body.forEach(param => {
-    	wrapper.find(`#${param.name}_bodyParam`).props().value = "test_input";
-		})
-
-		wrapper.find(`button[type="submit"]`).simulate('click');
-  });
+		wrapper.find(`form`).props().onSubmit({preventDefault: () => {}});
+    expect(wrapper.find(`ResponseView`)).to.have.lengthOf(1);
+	});
 
   it('Default value for url should match value in config', function () {
     const wrapper = mount(<ApiExplorer {...config}/>);

@@ -13,7 +13,8 @@
       "name": "full-name",
       "type": "text",
       "placeholder": "John Doe",
-      "required": true
+      "required": true,
+			"value": "Pipo Papo"
     },
     {
       "name": "phone",
